@@ -1098,3 +1098,113 @@ button.primary.danger:hover {
   border-left: 2px solid rgba(239, 95, 111, 0.4);
   padding-left: 10px;
 }
+
+/* ---- 审计快照对比 ---- */
+.snapshot-panel h2 {
+  font-size: 15px;
+}
+
+.snapshot-save-row {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.snapshot-save-row input {
+  flex: 1;
+}
+
+.snapshot-list {
+  margin-bottom: 12px;
+}
+
+.snapshot-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel-2);
+  margin-bottom: 6px;
+}
+
+.snapshot-row .snapshot-name {
+  font-weight: 600;
+}
+
+.snapshot-row .spacer {
+  flex: 1;
+}
+
+.snapshot-row button {
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.snapshot-compare-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto auto;
+  gap: 10px;
+  align-items: end;
+  margin: 12px 0 14px;
+}
+
+.snapshot-compare-row label > span {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+@media (max-width: 900px) {
+  .snapshot-compare-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.tag.diff-changed {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.tag.diff-miss {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+
+.tag.diff-hit {
+  background: var(--info-bg);
+  color: var(--accent);
+}
+
+.tag.diff-same {
+  background: var(--ok-bg);
+  color: var(--ok);
+}
+
+.traffic-card.diff-hit-to-miss {
+  border-left-color: var(--warn);
+}
+
+.traffic-card.diff-miss-to-hit {
+  border-left-color: var(--accent);
+}
+
+.traffic-card.diff-same-action {
+  border-left-color: var(--ok);
+}
+
+.traffic-side.diff-miss-side {
+  color: var(--warn);
+  font-size: 12px;
+}

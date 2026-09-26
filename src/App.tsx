@@ -6,6 +6,7 @@ import { SimplifyPanel } from './SimplifyPanel'
 import { RegressionPanel } from './RegressionPanel'
 import { AttributionPanel } from './AttributionPanel'
 import { ExceptionPanel } from './ExceptionPanel'
+import { SnapshotPanel } from './SnapshotPanel'
 import { ImportModal, ExportModal } from './Modals'
 import { ImportExceptionsModal } from './ExceptionImportModal'
 import { ReorderPreviewModal } from './ReorderPreviewModal'
@@ -13,6 +14,8 @@ import { audit, exportReport, newRuleInput, parseRulesJson } from './audit/engin
 import { movedRules } from './audit/reorder'
 import { parseExceptionsJson, serializeExceptions, evaluateExceptions } from './audit/exemption'
 import type { ExceptionInput } from './audit/exemption'
+import { createSnapshot } from './audit/snapshot'
+import type { RuleSnapshot } from './audit/snapshot'
 import type { RuleInput } from './audit/types'
 import { createDemoRules } from './defaultRules'
 import { formatSize } from './format'
@@ -25,6 +28,7 @@ interface PendingReorder {
 export default function App() {
   const [rules, setRules] = useState<RuleInput[]>(() => createDemoRules())
   const [exceptions, setExceptions] = useState<ExceptionInput[]>([])
+  const [snapshots, setSnapshots] = useState<RuleSnapshot[]>([])
   const [showImport, setShowImport] = useState(false)
   const [showExport, setShowExport] = useState(false)
   const [showImportExceptions, setShowImportExceptions] = useState(false)
@@ -107,6 +111,18 @@ export default function App() {
   }
 
   const exportExceptionsJson = () => serializeExceptions(exceptions)
+
+  // 快照保存的是当前规则的深拷贝：之后的编辑 / 调序 / 启停都不影响它；
+  // 快照对比只读取快照内容，绝不回写当前规则
+  const saveSnapshot = (name: string) => {
+    const snap = createSnapshot(name, rules)
+    setSnapshots((ss) => [...ss, snap])
+    setNotice(`已保存快照「${snap.name}」（${rules.length} 条规则）；之后的规则编辑不影响该快照。`)
+    setTimeout(() => setNotice(null), 4000)
+  }
+
+  const deleteSnapshot = (id: string) =>
+    setSnapshots((ss) => ss.filter((s) => s.id !== id))
 
   const s = report.stats
 
@@ -240,6 +256,15 @@ export default function App() {
           auditReport={report}
           exceptions={exceptions}
           setExceptions={setExceptions}
+        />
+      </div>
+
+      <div className="section-gap">
+        <SnapshotPanel
+          rules={rules}
+          snapshots={snapshots}
+          onSaveSnapshot={saveSnapshot}
+          onDeleteSnapshot={deleteSnapshot}
         />
       </div>
 
