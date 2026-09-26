@@ -1098,3 +1098,62 @@ button.primary.danger:hover {
   border-left: 2px solid rgba(239, 95, 111, 0.4);
   padding-left: 10px;
 }
+
+/* ---- 审计快照对比 ---- */
+.snapshot-panel h2 {
+  font-size: 15px;
+}
+
+.snapshot-save-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.snapshot-save-row input {
+  flex: 1;
+  min-width: 220px;
+}
+
+.snapshot-save-row button,
+.snapshot-compare-row button {
+  white-space: nowrap;
+}
+
+.snapshot-table th,
+.snapshot-table td {
+  white-space: nowrap;
+}
+
+.enable-cell input[type='radio'] {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+.snapshot-compare-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0 4px;
+}
+
+.snapshot-report {
+  border-top: 1px solid var(--border);
+  margin-top: 14px;
+  padding-top: 14px;
+}
+
+.badge.info-badge {
+  background: var(--info-bg);
+  color: #c6d8ff;
+  border: 1px solid var(--accent-dim);
+}
+
+.snapshot-category {
+  margin-bottom: 18px;
+}
+

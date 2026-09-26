@@ -6,6 +6,7 @@ import { SimplifyPanel } from './SimplifyPanel'
 import { RegressionPanel } from './RegressionPanel'
 import { AttributionPanel } from './AttributionPanel'
 import { ExceptionPanel } from './ExceptionPanel'
+import { SnapshotPanel } from './SnapshotPanel'
 import { ImportModal, ExportModal } from './Modals'
 import { ImportExceptionsModal } from './ExceptionImportModal'
 import { ReorderPreviewModal } from './ReorderPreviewModal'
@@ -241,6 +242,10 @@ export default function App() {
           exceptions={exceptions}
           setExceptions={setExceptions}
         />
+      </div>
+
+      <div className="section-gap">
+        <SnapshotPanel rules={rules} />
       </div>
 
       <div className="section-gap">
